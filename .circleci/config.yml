@@ -9,6 +9,9 @@ jobs:
   simplewebsite:
     docker:
       - image: yeasy/simple-web:latest
+     
+    steps:
+      - run: true
   
   curltest:
     docker:
