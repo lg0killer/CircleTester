@@ -10,13 +10,11 @@ jobs:
       - checkout
       - add_ssh_keys:
            fingerprints:
-              - "9a:1d:04:63:d4:20:aa:c2:12:9b:f5:18:61:3f:de:37"
+              - "29:0c:ac:58:11:70:b3:69:13:00:6c:9e:dc:0d:e3:83"
       - run:
           name: checkout
           command: |
-            GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_9a1d0463d420aac2129bf518613fde37' git clone git@github.com:lg0killer/HomeServer.git ../stuffs
-            ls
-            ls ../
+            git clone git@github.com:lg0killer/HomeServer.git ../stuffs
           
   
   simplewebsite:
