@@ -14,8 +14,7 @@ jobs:
       - run:
           name: checkout
           command: |
-            GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_290cac581170b36913006c9edc0de383'
-            git clone git@github.com:lg0killer/HomeServer.git ../stuffs
+            GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_290cac581170b36913006c9edc0de383' git clone git@github.com:lg0killer/HomeServer.git ../stuffs
             ls
             ls ../
           
