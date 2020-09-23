@@ -16,6 +16,7 @@ jobs:
   curltest:
     docker:
       - image: ubuntu
+      - image: yeasy/simple-web:latest
 
     steps:
       - run:
