@@ -11,7 +11,7 @@ jobs:
       - image: yeasy/simple-web:latest
      
     steps:
-      - run: true
+      - run: echo "Hi Mom!"
   
   curltest:
     docker:
