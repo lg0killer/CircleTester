@@ -7,6 +7,7 @@ jobs:
       - image: circleci/python:3.8
       
     steps:
+      - setup_remote_docker
       - checkout
       - add_ssh_keys:
            fingerprints:
@@ -48,4 +49,4 @@ workflows:
       - simplewebsite
       - curltest:
           requires:
-            - simplewebsite
+            - checkouttest
