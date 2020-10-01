@@ -17,6 +17,14 @@ jobs:
           command: |
             docker build -t teartest .
             git clone git@github.com:lg0killer/HomeServer.git ../stuffs
+            
+       - run:
+          name: Curl
+          command: |
+            sudo apt update
+            sudo apt install -y curl
+            docker run -d -p 80:80 teartest
+            curl http://localhost:80
           
   
   simplewebsite:
@@ -25,19 +33,7 @@ jobs:
      
     steps:
       - run: echo hi
-  
-  curltest:
-    docker:
-      - image: circleci/python:3.8.0-buster
-      - image: teartest
 
-    steps:
-      - run:
-          name: Curl
-          command: |
-            sudo apt update
-            sudo apt install -y curl
-            curl http://localhost:80
 
 # Orchestrate or schedule a set of jobs
 workflows:
@@ -47,6 +43,3 @@ workflows:
     jobs:
       - checkouttest
       - simplewebsite
-      - curltest:
-          requires:
-            - checkouttest
