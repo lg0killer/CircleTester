@@ -19,25 +19,22 @@ jobs:
   
   simplewebsite:
     docker:
-      - image: yeasy/simple-web:latest
+      - image: circleci/python:3.8.0-buster
      
     steps:
-      - run: echo "Hi Mom!"
+      - run: docker build -t teartest .
   
   curltest:
     docker:
       - image: circleci/python:3.8.0-buster
-      #- image: yeasy/simple-web:latest
+      - image: teartest
 
     steps:
-      - setup_remote_docker
-      - checkout
       - run:
           name: Curl
           command: |
             sudo apt update
             sudo apt install -y curl
-            docker-compose up -d
             curl http://localhost:80
 
 # Orchestrate or schedule a set of jobs
