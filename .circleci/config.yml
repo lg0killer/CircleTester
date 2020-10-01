@@ -14,13 +14,12 @@ jobs:
       - run:
           name: checkout
           command: |
-            docker build -t teartest .
             git clone git@github.com:lg0killer/HomeServer.git ../stuffs
             
       - run:
           name: Curl
           command: |
-            docker run -d -p 80:80 teartest
+            docker-compose up -d
             sudo apt update
             sudo apt install -y curl
             curl http://localhost:80    
