@@ -21,9 +21,9 @@ jobs:
       - run:
           name: Curl
           command: |
+            docker run -d -p 80:80 teartest
             sudo apt update
             sudo apt install -y curl
-            docker run -d -p 80:80 teartest
             curl http://localhost:80    
   
   simplewebsite:
