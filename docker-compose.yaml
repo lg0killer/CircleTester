@@ -1,0 +1,9 @@
+version: '3'
+
+services: 
+    website1:
+        image: yeasy/simple-web:latest
+        hostname: website1
+        container_name: website1
+        ports:
+          - 80:80
