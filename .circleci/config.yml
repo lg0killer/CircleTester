@@ -4,7 +4,7 @@ version: 2.1
 jobs:
   checkouttest:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:202008-01
       
     steps:
       - checkout
