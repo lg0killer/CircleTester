@@ -35,7 +35,7 @@ jobs:
           name: Curl
           command: |
             sudo apt install net-tools
-            sudo netstat -ap
+            sudo netstat -tulpn
             docker-compose up -d
             sudo apt update
             sudo apt install -y curl
