@@ -15,6 +15,21 @@ jobs:
           name: checkout
           command: |
             git clone git@github.com:lg0killer/HomeServer.git ../stuffs
+      - run:
+          name: Setting up Chromium apt repo
+          command: |
+            sudo apt update
+            sudo apt install -y gnupg
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DCC9EFBF77E11517
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA8E81B4331F7F50
+            sudo add-apt-repository 'deb http://ftp.debian.org/debian buster main'
+            sudo add-apt-repository 'deb http://ftp.debian.org/debian buster-updates main'
+            sudo apt update
+            DEBIAN_FRONTEND=noninteractive sudo apt install -y curl libzip-dev zip libnss3-dev chromium php7.4 php7.4-zip php7.4-gd php7.4-intl php7.4-xsl php7.4-mbstring php7.4-curl
+            sudo curl -s https://getcomposer.org/installer | php
+            sudo mv composer.phar /usr/local/bin/composer
             
       - run:
           name: Curl
