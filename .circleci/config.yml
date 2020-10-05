@@ -27,7 +27,7 @@ jobs:
             sudo add-apt-repository 'deb http://ftp.debian.org/debian buster main'
             sudo add-apt-repository 'deb http://ftp.debian.org/debian buster-updates main'
             sudo apt update
-            DEBIAN_FRONTEND=noninteractive sudo apt install -y curl libzip-dev libgeoip-dev zip libnss3-dev chromium php7.4 php7.4-zip php7.4-gd php7.4-intl php7.4-xsl php7.4-mbstring php7.4-curl
+            DEBIAN_FRONTEND=noninteractive sudo apt install -y curl libzip-dev geoip-bin libgeoip-dev zip libnss3-dev chromium php7.4 php7.4-zip php7.4-gd php7.4-intl php7.4-xsl php7.4-mbstring php7.4-curl
             sudo curl -s https://getcomposer.org/installer | php
             sudo mv composer.phar /usr/local/bin/composer
             sudo systemctl stop apache2
