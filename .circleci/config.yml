@@ -74,4 +74,4 @@ workflows:
             tags:
               only: /^v.*/
           requires:
-            - simpewebsite
+            - simplewebsite
