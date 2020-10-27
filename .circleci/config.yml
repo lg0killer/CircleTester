@@ -1,6 +1,9 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  slack: circleci/slack@4.0
+
 jobs:
   checkouttest:
     machine:
@@ -48,6 +51,13 @@ jobs:
      
     steps:
       - run: echo hi
+      - slack/notify:
+          event: fail
+          mentions: '@EngineeringTeam'
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 
 
 # Orchestrate or schedule a set of jobs
