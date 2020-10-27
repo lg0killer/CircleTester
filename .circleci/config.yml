@@ -70,6 +70,27 @@ jobs:
               ]
             }
 
+  notify:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 
 # Orchestrate or schedule a set of jobs
 workflows:
@@ -78,5 +99,6 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - checkouttest
-      - simplewebsite:
+      - simplewebsite
+      - notify:
           context: slack-secrets
