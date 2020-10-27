@@ -79,4 +79,4 @@ workflows:
     jobs:
       - checkouttest
       - simplewebsite:
-        context: slack-secrets
+          context: slack-secrets
