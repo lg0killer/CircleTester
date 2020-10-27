@@ -78,5 +78,5 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - checkouttest
-      - simplewebsite
+      - simplewebsite:
         context: slack-secrets
