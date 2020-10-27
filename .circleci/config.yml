@@ -101,4 +101,4 @@ workflows:
       - checkouttest
       - simplewebsite
       - notify:
-          context: SLACK_WEBHOOK
+          context: slack-secrets
