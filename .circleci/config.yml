@@ -68,3 +68,10 @@ workflows:
     jobs:
       - checkouttest
       - simplewebsite
+      - slack/on-hold:
+          context: slack-secrets
+          filters:
+            tags:
+              only: /^v.*/
+          requires:
+            - simpewebsite
