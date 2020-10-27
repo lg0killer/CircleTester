@@ -57,7 +57,18 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
-          template: success_tagged_deploy_1
+          custom: |
+          {
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "A simple test to see if this works"
+                }
+              }
+            ]
+          }
 
 
 # Orchestrate or schedule a set of jobs
@@ -68,10 +79,4 @@ workflows:
     jobs:
       - checkouttest
       - simplewebsite
-      - slack/on-hold:
-          context: slack-secrets
-          filters:
-            tags:
-              only: /^v.*/
-          requires:
-            - simplewebsite
+        context: slack-secrets
