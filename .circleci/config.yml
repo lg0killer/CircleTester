@@ -12,6 +12,13 @@ jobs:
     steps:
       - checkout
       - run: exit 1
+      - slack/notify:
+          color: "#42e2f4"
+          mentions: "here,"
+          message: So this is the Checkout tests notification
+      - slack/status:
+          fail_only: true
+          mentions: "here"
   
   simplewebsite:
     docker:
@@ -21,11 +28,11 @@ jobs:
       - run: echo hi
       - slack/notify:
           color: "#42e2f4"
-          mentions: "yemiwebby,"
+          mentions: "here,"
           message: A custom message to notify the channel about the latest build
       - slack/status:
           fail_only: true
-          mentions: "yemiwebby"
+          mentions: "here"
 
 
 # Orchestrate or schedule a set of jobs
