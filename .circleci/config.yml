@@ -57,6 +57,7 @@ jobs:
           template: basic_fail_1
       - slack/notify:
           event: pass
+          branch_pattern: circleci-project-setup
           custom: |
             {
               "blocks": [
@@ -75,6 +76,7 @@ jobs:
       - image: 'cimg/base:stable'
     steps:
       - slack/notify:
+          branch_pattern: circleci-project-setup
           custom: |
             {
               "blocks": [
@@ -83,7 +85,7 @@ jobs:
                   "fields": [
                     {
                       "type": "plain_text",
-                      "text": "*This is a text notification*",
+                      "text": "*This is a text notification from its own job*",
                       "emoji": true
                     }
                   ]
@@ -99,6 +101,7 @@ workflows:
     # Run the welcome/run job in its own container
     jobs:
       - checkouttest
-      - simplewebsite
+      - simplewebsite:
+          context: slack-secrets
       - notify:
           context: slack-secrets
