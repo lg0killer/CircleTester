@@ -2,7 +2,7 @@
 version: 2.1
 
 orbs:
-  slack: circleci/slack@4.0
+  slack: circleci/slack@3.4.2
 
 jobs:
   checkouttest:
@@ -24,47 +24,13 @@ jobs:
     steps:
       - run: echo hi
       - slack/notify:
-          event: fail
-          mentions: '@EngineeringTeam'
-          template: basic_fail_1
-      - slack/notify:
-          event: pass
-          branch_pattern: circleci-project-setup
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "A simple test to see if this works"
-                  }
-                }
-              ]
-            }
+          color: "#42e2f4"
+          mentions: "yemiwebby,"
+          message: A custom message to notify the channel about the latest build
+      - slack/status:
+          fail_only: true
+          mentions: "yemiwebby"
 
-  notify:
-    docker:
-      - image: 'cimg/base:stable'
-    steps:
-      - slack/notify:
-          branch_pattern: circleci-project-setup
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "plain_text",
-                      "text": "*This is a text notification from its own job*",
-                      "emoji": true
-                    }
-                  ]
-                }
-              ]
-            }
-          event: always
 
 # Orchestrate or schedule a set of jobs
 workflows:
@@ -74,7 +40,4 @@ workflows:
     jobs:
       - checkouttest:
           context: slack-secrets
-      - simplewebsite:
-          context: slack-secrets
-      - notify:
-          context: slack-secrets
+      - simplewebsite
