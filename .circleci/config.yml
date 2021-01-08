@@ -64,8 +64,7 @@ jobs:
 
             echo ${PASSING}
 
-            curl --location --request POST "${SLACK_WEBHOOK}" -H "Authorization: Bearer $SLACK_ACCESS_TOKEN" --header 'Content-Type: application/json' \
-            --data-raw '{
+            template={
               "blocks": [
                 {
                   "type": "header",
@@ -136,7 +135,10 @@ jobs:
                   ]
                 }
               ]
-            }'
+            }
+
+            curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' \
+            --data-raw '$template'
           when: on_success
 
       # - slack/notify:
