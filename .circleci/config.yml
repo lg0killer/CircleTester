@@ -62,9 +62,87 @@ jobs:
             ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
             FAILURES=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
 
-            echo ${PASSING}
+            generate_post_data()
+            {
+              cat <<EOF
+              {
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Job Passed. :tada:",
+                      "emoji": true
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Job*: ${CIRCLE_JOB}"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Project*:\\n$CIRCLE_PROJECT_REPONAME"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Branch*:\\n$CIRCLE_BRANCH"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Author*:\\n$CIRCLE_USERNAME"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Passing*:\\n$PASSING"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*ERRORS*:\\n$ERRORS"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*FAILURES*:\\n$FAILURES"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Mentions*:\\n$SLACK_PARAM_MENTIONS"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "actions",
+                    "elements": [
+                      {
+                        "type": "button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "View Job"
+                        },
+                        "url": "http://google.com"
+                      }
+                    ]
+                  }
+                ]
+              }
+              EOF
+            }
 
-            curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data-binary @success.json
+            curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data "$(generate_post_data)"
+
+
           when: on_success
 
       # - slack/notify:
