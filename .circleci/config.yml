@@ -64,7 +64,7 @@ jobs:
 
             generate_post_data()
             {
-              cat <<EOF
+              cat \\<<EOF
               {
                 "blocks": [
                   {
