@@ -40,7 +40,7 @@ jobs:
             ERRORS=`grep -o -i E report.txt | wc -l`
             FAILURES=`grep -o -i E report.txt | wc -l`
 
-            echo PASSING
+            echo ${PASSING}
 
       - store_test_results:
           path: ~/phpunit
