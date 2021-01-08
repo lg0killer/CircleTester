@@ -39,6 +39,7 @@ jobs:
       - run: 
           name: Get Results
           command: |
+            echo https://circleci.com/api/v1.1/project/github/lg0killer/${CIRCLE_JOB}/${CIRCLE_BUILD_NUM}/tests
             curl https://circleci.com/api/v1.1/project/github/lg0killer/${CIRCLE_JOB}/${CIRCLE_BUILD_NUM}/tests -H "Circle-Token: ${CIRLCE_API_KEY}"
 
       - slack/notify:
