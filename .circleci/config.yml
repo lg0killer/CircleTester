@@ -38,9 +38,9 @@ jobs:
 
             echo ${PASSING}
 
-            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}"  --data-raw '{ "name": "PASSING","value": "${PASSING}"}'
-            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}"  --data-raw '{ "name": "ERRORS","value": "${ERRORS}"}'
-            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}"  --data-raw '{ "name": "FAILURES","value": "${FAILURES}"}'
+            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}" --header 'Content-Type: application/json'  --data-raw '{ "name": "PASSING","value": "${PASSING}"}'
+            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}" --header 'Content-Type: application/json'  --data-raw '{ "name": "ERRORS","value": "${ERRORS}"}'
+            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}" --header 'Content-Type: application/json'  --data-raw '{ "name": "FAILURES","value": "${FAILURES}"}'
 
       - store_test_results:
           path: ~/phpunit
