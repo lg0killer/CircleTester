@@ -28,7 +28,7 @@ jobs:
       - run: echo hi
 
       - store_test_results:
-          path: ~/report.xml
+          path: report.xml
 
       - run: 
           name: Get Results
