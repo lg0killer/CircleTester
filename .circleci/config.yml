@@ -26,8 +26,12 @@ jobs:
      
     steps:
       - checkout 
-      
-      - run: cp ./report.xml ~/phpunit/browsertests.xml
+
+      - run: 
+          name: Copy Results
+          command: |
+            mkdir -p ~/phpunit
+            cp ./report.xml ~/phpunit/browsertests.xml
 
       - store_test_results:
           path: ~/phpunit
