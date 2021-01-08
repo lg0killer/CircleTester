@@ -58,7 +58,7 @@ jobs:
       - run: 
           name: Get Success Results
           command: |
-            only_for_branches="master,release,feature/circleci"
+            only_for_branches="master,release,feature/circleci,circleci-project-setup"
 
 
             generate_post_data()
