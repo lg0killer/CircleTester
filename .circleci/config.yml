@@ -32,32 +32,121 @@ jobs:
           command: |
             mkdir -p ~/phpunit
             cp ./report.xml ~/phpunit/browsertests.xml
+            cp ./report.txt ~/phpunit/browsertests.txt
             PASSING=`grep -o -i \\. report.txt | wc -l`
             ERRORS=`grep -o -i E report.txt | wc -l`
             FAILURES=`grep -o -i E report.txt | wc -l`
 
             echo ${PASSING}
 
-            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}" --header 'Content-Type: application/json'  --data-raw '{ "name": "PASSING","value": "${PASSING}"}'
-            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}" --header 'Content-Type: application/json'  --data-raw '{ "name": "ERRORS","value": "${ERRORS}"}'
-            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}" --header 'Content-Type: application/json'  --data-raw '{ "name": "FAILURES","value": "${FAILURES}"}'
-
       - store_test_results:
           path: ~/phpunit
 
       - run: 
-          name: Get Results
+          name: Get Failed Results
           command: |
             echo https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/${CIRCLE_BUILD_NUM}/tests
             curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/${CIRCLE_BUILD_NUM}/tests -H "Circle-Token: ${CIRLCE_API_KEY}"
 
-      - slack/notify:
-          color: "#42e2f4"
-          mentions: "${CIRCLE_USERNAME},"
-          message: A custom message to notify the channel about the latest build. ${PASSING} passed, ${FAILURES} failed, ${ERRORS} errors.
-      - slack/status:
-          fail_only: true
-          mentions: "${CIRCLE_USERNAME}"
+            PASSING=`grep -o -i \\. ~/phpunit/browsertests.txt | wc -l`
+            ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
+            FAILURES=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
+
+            echo ${PASSING}
+          when: on_fail
+
+      - run: 
+          name: Get Success Results
+          command: |
+            PASSING=`grep -o -i \\. ~/phpunit/browsertests.txt | wc -l`
+            ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
+            FAILURES=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
+
+            echo ${PASSING}
+
+            curl --location --request POST 'https://hooks.slack.com/services/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' --header 'Content-Type: application/json' \
+            --data-raw '{
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Job Passed. :tada:",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Job*: ${CIRCLE_JOB}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Project*:\\n$CIRCLE_PROJECT_REPONAME"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Branch*:\\n$CIRCLE_BRANCH"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Author*:\\n$CIRCLE_USERNAME"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Passing*:\\n$PASSING"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*ERRORS*:\\n$ERRORS"
+                    }
+                    ,
+                    {
+                      "type": "mrkdwn",
+                      "text": "*FAILURES*:\\n$FAILURES"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Mentions*:\\n$SLACK_PARAM_MENTIONS"
+                    }
+                  ]
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Job"
+                      },
+                      "url": "${CIRCLE_BUILD_URL}"
+                    }
+                  ]
+                }
+              ]
+            }'
+          when: on_success
+
+      # - slack/notify:
+      #     color: "#42e2f4"
+      #     mentions: "${CIRCLE_USERNAME},"
+      #     message: A custom message to notify the channel about the latest build. ${PASSING} passed, ${FAILURES} failed, ${ERRORS} errors.
+      # - slack/status:
+      #     fail_only: true
+      #     mentions: "${CIRCLE_USERNAME}"
 
 
 # Orchestrate or schedule a set of jobs
