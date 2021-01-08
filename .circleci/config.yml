@@ -32,6 +32,9 @@ jobs:
           command: |
             mkdir -p ~/phpunit
             cp ./report.xml ~/phpunit/browsertests.xml
+            export PASSING=`grep -o -i . report.txt | wc -l`
+            export ERRORS=`grep -o -i E report.txt | wc -l`
+            export FAILURES=`grep -o -i E report.txt | wc -l`
 
       - store_test_results:
           path: ~/phpunit
@@ -45,10 +48,11 @@ jobs:
       - slack/notify:
           color: "#42e2f4"
           mentions: "${CIRCLE_USERNAME},"
-          message: A custom message to notify the channel about the latest build
+          message: A custom message to notify the channel about the latest build. ${PASSING} passed, ${FAILURES} failed, ${ERRORS} errors.
       - slack/status:
           fail_only: true
           mentions: "${CIRCLE_USERNAME}"
+          message: A custom message to notify the channel about the latest build. ${PASSING} passed, ${FAILURES} failed, ${ERRORS} errors.
 
 
 # Orchestrate or schedule a set of jobs
