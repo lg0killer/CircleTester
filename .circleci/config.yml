@@ -23,17 +23,10 @@ jobs:
   simplewebsite:
     docker:
       - image: circleci/python:3.8.0-buster
-
-    parameters: # parameters are at the job level
-      PASSING:
-        type: integer
-        default: 0
-      ERRORS:
-        type: integer
-        default: 0
-      FAILURES:
-        type: integer
-        default: 0
+    environment:
+      PASSING: 0
+      ERRORS: 0
+      FAILURES: 0
      
     steps:
       - checkout 
