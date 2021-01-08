@@ -131,7 +131,7 @@ jobs:
             }
 
 
-            IFS=', ' read -r -a branches <<< "$only_for_branches"
+            IFS=', ' read -r -a branches \<<< "$only_for_branches"
 
             for branch in "${branches[@]}"
             do
