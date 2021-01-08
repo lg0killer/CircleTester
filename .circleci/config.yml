@@ -25,10 +25,10 @@ jobs:
       - image: circleci/python:3.8.0-buster
      
     steps:
-      - run: echo hi
+      - run: cp report.xml ~/phpunit/browsertests.xml
 
       - store_test_results:
-          path: report.xml
+          path: ~/phpunit
 
       - run: 
           name: Get Results
