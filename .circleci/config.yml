@@ -64,7 +64,7 @@ jobs:
 
             echo ${PASSING}
 
-            curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data-binary './success.json'
+            curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data-binary @success.json
           when: on_success
 
       # - slack/notify:
