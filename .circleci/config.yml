@@ -137,7 +137,7 @@ jobs:
                   }
                 ]
               }
-              EOF
+            EOF
             }
 
             curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data "$(generate_post_data)"
