@@ -36,9 +36,11 @@ jobs:
           command: |
             mkdir -p ~/phpunit
             cp ./report.xml ~/phpunit/browsertests.xml
-            export PASSING=`grep -o -i . report.txt | wc -l`
-            export ERRORS=`grep -o -i E report.txt | wc -l`
-            export FAILURES=`grep -o -i E report.txt | wc -l`
+            PASSING=`grep -o -i . report.txt | wc -l`
+            ERRORS=`grep -o -i E report.txt | wc -l`
+            FAILURES=`grep -o -i E report.txt | wc -l`
+
+            echo PASSING
 
       - store_test_results:
           path: ~/phpunit
