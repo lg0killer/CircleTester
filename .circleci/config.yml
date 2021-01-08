@@ -56,7 +56,6 @@ jobs:
       - slack/status:
           fail_only: true
           mentions: "${CIRCLE_USERNAME}"
-          message: A custom message to notify the channel about the latest build. ${PASSING} passed, ${FAILURES} failed, ${ERRORS} errors.
 
 
 # Orchestrate or schedule a set of jobs
