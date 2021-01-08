@@ -23,10 +23,6 @@ jobs:
   simplewebsite:
     docker:
       - image: circleci/python:3.8.0-buster
-    environment:
-      PASSING: 0
-      ERRORS: 0
-      FAILURES: 0
      
     steps:
       - checkout 
@@ -36,11 +32,15 @@ jobs:
           command: |
             mkdir -p ~/phpunit
             cp ./report.xml ~/phpunit/browsertests.xml
-            PASSING=`grep -o -i . report.txt | wc -l`
+            PASSING=`grep -o -i \\. report.txt | wc -l`
             ERRORS=`grep -o -i E report.txt | wc -l`
             FAILURES=`grep -o -i E report.txt | wc -l`
 
             echo ${PASSING}
+
+            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}"  --data-raw '{ "name": "PASSING","value": "${PASSING}"}'
+            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}"  --data-raw '{ "name": "ERRORS","value": "${ERRORS}"}'
+            curl https://circleci.com/api/v1.1/project/github/lg0killer/CircleTester/envvar -H "Circle-Token: ${CIRLCE_API_KEY}"  --data-raw '{ "name": "FAILURES","value": "${FAILURES}"}'
 
       - store_test_results:
           path: ~/phpunit
