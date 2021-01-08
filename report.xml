@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="" tests="12" assertions="73" errors="4" warnings="0" failures="2" skipped="0" time="186.885637">
+    <testsuite name="Browser Test Suite" tests="12" assertions="73" errors="4" warnings="0" failures="2" skipped="0" time="186.885637">
+      <testsuite name="Tests\Browser\BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" tests="12" assertions="73" errors="4" warnings="0" failures="2" skipped="0" time="186.885637">
+        <testcase name="Base_HTTP_Balancer" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="19" assertions="11" time="27.273535">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Browser\BalancerTest::Base_HTTP_Balancer
+Did not see expected text [Real Visit Results] within element [body].
+Failed asserting that false is true.
+
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\MakesAssertions.php:173
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\MakesAssertions.php:144
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:48
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:68
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:58</failure>
+        </testcase>
+        <testcase name="Remove_Base_HTTP_Balancer" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="65" assertions="5" time="7.649935"/>
+        <testcase name="Base_SSL_Balancer" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="83" assertions="8" time="70.316812">
+          <error type="Facebook\WebDriver\Exception\TimeoutException">Tests\Browser\BalancerTest::Base_SSL_Balancer
+Facebook\WebDriver\Exception\TimeoutException: Waited 60 seconds for text [Balancer reconfigured successfully].
+
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\WaitsForElements.php:291
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\WaitsForElements.php:108
+E:\GIT\Snapt-Application\Tests\tests\Browser\Pages\Balancer\BalancerStatus.php:66
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Browser.php:478
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\WaitsForElements.php:28
+E:\GIT\Snapt-Application\Tests\tests\Browser\Pages\Balancer\BalancerStatus.php:68
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Browser.php:645
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:100
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:68
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:107</error>
+        </testcase>
+        <testcase name="Remove_Base_SSL_Balancer" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="114" assertions="7" time="12.723895"/>
+        <testcase name="Small_Object_Caching_Balancer_814" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="133" assertions="10" time="14.289303">
+          <error type="Facebook\WebDriver\Exception\NoSuchElementException">Tests\Browser\BalancerTest::Small_Object_Caching_Balancer_814
+Facebook\WebDriver\Exception\NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"body a[href="/snaptHA/cache"]"}
+  (Session info: headless chrome=87.0.4280.88)
+
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:117
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:370
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:590
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:214
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\ElementResolver.php:373
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\InteractsWithMouse.php:52
+E:\GIT\Snapt-Application\Tests\tests\Browser\Pages\Balancer\BalancerStatus.php:115
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Browser.php:645
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:157
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:68
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:165</error>
+        </testcase>
+        <testcase name="Cleanup_Small_Object_Caching_Balancer_814" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="172" assertions="2" time="7.848304">
+          <error type="Facebook\WebDriver\Exception\NoSuchElementException">Tests\Browser\BalancerTest::Cleanup_Small_Object_Caching_Balancer_814
+Facebook\WebDriver\Exception\NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":"body a[href="/snaptHA/cache"]"}
+  (Session info: headless chrome=87.0.4280.88)
+
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:117
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:370
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:590
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:214
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\ElementResolver.php:373
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\InteractsWithMouse.php:52
+E:\GIT\Snapt-Application\Tests\tests\Browser\Pages\Balancer\BalancerStatus.php:149
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Browser.php:645
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:180
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:68
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:182</error>
+        </testcase>
+        <testcase name="Create_New_ACL" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="191" assertions="1" time="4.529826"/>
+        <testcase name="removing_acl_attachment_removes_all_acls_1461" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="209" assertions="13" time="17.554425">
+          <error type="Facebook\WebDriver\Exception\NoSuchElementException">Tests\Browser\BalancerTest::removing_acl_attachment_removes_all_acls_1461
+Facebook\WebDriver\Exception\NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//tbody/tr[@id='use-server__88aaa80c34e92adc5cabc462f285ba75']/td[2]/img[1]"}
+  (Session info: headless chrome=87.0.4280.88)
+
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Exception\WebDriverException.php:117
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Remote\HttpCommandExecutor.php:370
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:590
+E:\GIT\Snapt-Application\Tests\vendor\php-webdriver\webdriver\lib\Remote\RemoteWebDriver.php:214
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\InteractsWithMouse.php:81
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:250
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:68
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:262</error>
+        </testcase>
+        <testcase name="Cleanup_removing_acl_attachment_removes_all_acls_1461" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="269" assertions="5" time="7.457878"/>
+        <testcase name="Remove_New_ACL" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="286" assertions="2" time="3.659871">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Browser\BalancerTest::Remove_New_ACL
+Saw unexpected text [TestACL] within element [body].
+Failed asserting that true is false.
+
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\MakesAssertions.php:194
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\MakesAssertions.php:155
+E:\GIT\Snapt-Application\Tests\tests\Browser\Pages\Balancer\BalancerStatus.php:178
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Browser.php:645
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:293
+E:\GIT\Snapt-Application\Tests\vendor\laravel\dusk\src\Concerns\ProvidesBrowser.php:68
+E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php:294</failure>
+        </testcase>
+        <testcase name="Stop_Balancer" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="301" assertions="5" time="5.902976"/>
+        <testcase name="Start_Balancer" class="Tests\Browser\BalancerTest" classname="Tests.Browser.BalancerTest" file="E:\GIT\Snapt-Application\Tests\tests\Browser\03_BalancerTest.php" line="316" assertions="4" time="7.678878"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -26,6 +26,12 @@ jobs:
      
     steps:
       - run: echo hi
+
+      - store_test_results:
+          path: ~/report.xml
+
+      - run: curl https://circleci.com/api/v1.1/project/github/lg0killer/${CIRCLE_JOB}/${CIRCLE_BUILD_NUM}/tests -H "Circle-Token: ${CIRLCE_API_KEY}"
+
       - slack/notify:
           color: "#42e2f4"
           mentions: "${CIRCLE_USERNAME},"
