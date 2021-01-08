@@ -58,9 +58,8 @@ jobs:
       - run: 
           name: Get Success Results
           command: |
-            PASSING=`grep -o -i \\. ~/phpunit/browsertests.txt | wc -l`
-            ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
-            FAILURES=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
+            only_for_branches="master,release,feature/circleci"
+
 
             generate_post_data()
             {
@@ -105,20 +104,11 @@ jobs:
                       },
                       {
                         "type": "mrkdwn",
-                        "text": "*ERRORS*:\\n$ERRORS"
+                        "text": "*ERRORS*:\\n$TOTAL_FAILURES"
                       },
                       {
                         "type": "mrkdwn",
-                        "text": "*FAILURES*:\\n$FAILURES"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "section",
-                    "fields": [
-                      {
-                        "type": "mrkdwn",
-                        "text": "*Mentions*:\\n$SLACK_PARAM_MENTIONS"
+                        "text": "*Total Tests*:\\n$TOTAL_TESTS"
                       }
                     ]
                   },
@@ -131,7 +121,7 @@ jobs:
                           "type": "plain_text",
                           "text": "View Job"
                         },
-                        "url": "http://google.com"
+                        "url": "${CIRCLE_BUILD_URL}"
                       }
                     ]
                   }
@@ -140,7 +130,25 @@ jobs:
             EOF
             }
 
-            curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data "$(generate_post_data)"
+
+            IFS=', ' read -r -a branches <<< "$only_for_branches"
+
+            for branch in "${branches[@]}"
+            do
+                if [ $branch = ${CIRCLE_BRANCH} ]
+                then
+                  PASSING=`grep -o -i \\. ~/phpunit/browsertests.txt | wc -l`
+                  ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
+                  FAILURES=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
+
+                  TOTAL_FAILURES=`echo $(($FAILURES+$ERRORS))`
+                  TOTAL_TESTS=`echo $(($TOTAL_FAILURES+$PASSING))`
+
+                  curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data "$(generate_post_data)"
+
+                  break
+                fi
+            done
 
 
           when: on_success
