@@ -148,10 +148,10 @@ jobs:
                   echo "Total $FAILS"
 
                   echo "Calculating totat failures"
-                  TOTAL_FAILURES=$($FAILS+$ERRORS)
+                  TOTAL_FAILURES=$(($FAILS+$ERRORS))
 
                   echo "Getting Passed tests"
-                  PASSING=$($TOTAL_TESTS-$TOTAL_FAILURES)
+                  PASSING=$(($TOTAL_TESTS-$TOTAL_FAILURES))
 
                   curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data "$(generate_post_data)"
 
