@@ -144,10 +144,10 @@ jobs:
                   ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l || expr 0`
 
                   echo "Getting Failed tests"
-                  
+                  JOBFAILURES=`grep -o -i F ~/phpunit/browsertests.txt | wc -l || expr 0`
 
                   echo "Calculating totat failures"
-                  TOTAL_FAILURES=`echo $(($FAILURES+$ERRORS))`
+                  TOTAL_FAILURES=`echo $(($JOBFAILURES+$ERRORS))`
 
                   echo "Getting Passed tests"
                   PASSING=`echo $(($TOTAL_TESTS-$TOTAL_FAILURES))`
