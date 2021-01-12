@@ -144,7 +144,7 @@ jobs:
                   ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l || expr 0`
 
                   echo "Getting Failed tests"
-                  FAILURES=`grep -o -i \F ~/phpunit/browsertests.txt | wc -l || expr 0`
+                  FAILURES=`grep -o -i \'F\' ~/phpunit/browsertests.txt | wc -l || expr 0`
 
                   echo "Calculating totat failures"
                   TOTAL_FAILURES=`echo $(($FAILURES+$ERRORS))`
