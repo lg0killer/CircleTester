@@ -141,10 +141,10 @@ jobs:
                   TOTAL_TESTS=`cat ~/phpunit/browsertests.txt | cut -d' ' -f1 | grep -o -i \. | wc -l || expr 0`
                   
                   echo "Getting Error tests"
-                  ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l || expr 0`
+                  ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l` || ERRORS=0
 
                   echo "Getting Failed tests"
-                  FAILS=`grep -o -i F ~/phpunit/browsertests.txt | wc -l` || FAILS=expr 50
+                  FAILS=`grep -o -i F ~/phpunit/browsertests.txt | wc -l` || FAILS=50
                   echo "Total $FAILS"
 
                   echo "Calculating totat failures"
