@@ -144,14 +144,14 @@ jobs:
                   ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l || expr 0`
 
                   echo "Getting Failed tests"
-                  FAILS=`grep -o -i F ~/phpunit/browsertests.txt | wc -l || expr 50`
-                  echo $FAILS
+                  FAILS=`grep -o -i F ~/phpunit/browsertests.txt | wc -l || 50`
+                  echo "Total $FAILS"
 
                   echo "Calculating totat failures"
-                  TOTAL_FAILURES=`echo $(($FAILS+$ERRORS))`
+                  TOTAL_FAILURES=$($FAILS+$ERRORS)
 
                   echo "Getting Passed tests"
-                  PASSING=`echo $(($TOTAL_TESTS-$TOTAL_FAILURES))`
+                  PASSING=$($TOTAL_TESTS-$TOTAL_FAILURES)
 
                   curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data "$(generate_post_data)"
 
