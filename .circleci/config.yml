@@ -148,7 +148,7 @@ jobs:
                   echo $FAILS
 
                   echo "Calculating totat failures"
-                  TOTAL_FAILURES=`echo $(($ERRORS))`
+                  TOTAL_FAILURES=`echo $(($FAILS+$ERRORS))`
 
                   echo "Getting Passed tests"
                   PASSING=`echo $(($TOTAL_TESTS-$TOTAL_FAILURES))`
