@@ -137,20 +137,26 @@ jobs:
             do
                 if [ $branch = ${CIRCLE_BRANCH} ]
                 then
-                  PASSING=`grep -o -i \\. ~/phpunit/browsertests.txt | wc -l`
-                  ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
-                  FAILURES=`grep -o -i E ~/phpunit/browsertests.txt | wc -l`
+                  echo "Getting Total tests"
+                  TOTAL_TESTS=`cat ~/phpunit/browsertests.txt | cut -d' ' -f1 | grep -o -i \. | wc -l || expr 0`
+                  
+                  echo "Getting Error tests"
+                  ERRORS=`grep -o -i E ~/phpunit/browsertests.txt | wc -l || expr 0`
 
+                  echo "Getting Failed tests"
+                  FAILURES=`grep -o -i F ~/phpunit/browsertests.txt | wc -l || expr 0`
+
+                  echo "Calculating totat failures"
                   TOTAL_FAILURES=`echo $(($FAILURES+$ERRORS))`
-                  TOTAL_TESTS=`echo $(($TOTAL_FAILURES+$PASSING))`
+
+                  echo "Getting Passed tests"
+                  PASSING=`echo $(($TOTAL_TESTS-$TOTAL_FAILURES))`
 
                   curl --location --request POST "${SLACK_WEBHOOK}" --header 'Content-Type: application/json' --data "$(generate_post_data)"
 
                   break
                 fi
             done
-
-
           when: on_success
 
       # - slack/notify:
